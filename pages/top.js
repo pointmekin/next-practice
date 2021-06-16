@@ -4,7 +4,7 @@ export default function Top({ movies, timeTaken }) {
   return (
     <div>
       <div>{`Took ${timeTaken}`}</div>
-      <h1>Top 1000 Movies of All Time</h1>
+      <h1>Top 1000 Movies of All Time(CSR)</h1>
       <p>
         <small>(According to Metacritic)</small>
       </p>
