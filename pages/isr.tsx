@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../util/mongodb";
-export default function Top({ movies, timeTaken }) {
+export default function Isr({ movies, timeTaken }) {
   
   return (
     <div>
@@ -8,15 +8,13 @@ export default function Top({ movies, timeTaken }) {
       <p>
         <small>(According to Metacritic)</small>
       </p>
-      <ul>
-        {movies.map((movie) => (
-          <li>
-            <h2>{movie.title}</h2>
-            <h3>{movie.metacritic}</h3>
-            <p>{movie.plot}</p>
-          </li>
-        ))}
-      </ul>
+      {movies.map((movie) => (
+        <div style={{backgroundColor:"#f3f3f3", padding:"16px", margin:"12px", borderRadius:"8px"}}>
+          <h2>{movie.title}</h2>
+          <h3>{movie.metacritic}</h3>
+          <p>{movie.plot}</p>
+        </div>
+      ))}
     </div>
   );
 }
@@ -30,14 +28,16 @@ export async function getStaticProps() {
     .sort({ metacritic: -1 })
     .limit(1000)
     .toArray();
-
-  let t1 = new Date()
-  const timeTaken = t1 - t0
+  let t1: Date
+  t1 = new Date()
+  let timeTaken: number
+  timeTaken = t1.valueOf() - t0.valueOf()
 
   return {
     props: {
       movies: JSON.parse(JSON.stringify(movies)),
       timeTaken
     },
+    revalidate: 10
   };
 }
