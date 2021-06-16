@@ -3,7 +3,7 @@ export default function Movies({ movies, timeTaken }) {
   return (
     <div>
       <h3>{timeTaken}</h3>
-      <h1>Top 20 Movies of All Time</h1>
+      <h1>Top 20 Movies of All Time (Redeployed)</h1>
       <p>
         <small>(According to Metacritic)</small>
       </p>
