@@ -16,6 +16,7 @@ export default function UseEffect() {
     setSubreddit(inputValue);
   };
 
+  // This method isn't good because there's a delay before the function is executed and is renderred
   useEffect(() => {
     setTimeout(() => {
       setTime(new Date)
