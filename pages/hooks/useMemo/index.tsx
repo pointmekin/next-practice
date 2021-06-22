@@ -14,4 +14,10 @@ export default function UseMemo() {
   const expensiveCount = useMemo(() => {
     return count ** 2
   }, [count])
+
+  return (
+    <div>
+      {count}
+    </div>
+  )
 }
