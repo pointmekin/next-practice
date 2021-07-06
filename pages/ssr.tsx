@@ -1,10 +1,10 @@
-import { connectToDatabase } from "../util/mongodb";
-
+import { connectToDatabase } from "../util/mongodb"
+import { GetServerSideProps } from "next"
 export default function Ssr({ movies, timeTaken }) {
   
   return (
     <div>
-      <div>{`Took ${timeTaken}`}</div>
+      <h2>{`Took ${timeTaken}`}</h2>
       <h1>Top 1000 Movies of All Time(SSR)</h1>
       <p>
         <small>(According to Metacritic)</small>
@@ -19,7 +19,7 @@ export default function Ssr({ movies, timeTaken }) {
     </div>
   );
 }
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   let t0 = new Date()
 
   const { db } = await connectToDatabase();

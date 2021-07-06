@@ -1,10 +1,11 @@
-import { connectToDatabase } from "../util/mongodb";
+import { connectToDatabase } from "../util/mongodb"
+import { GetStaticProps } from 'next'
 
 export default function Isr({ movies, timeTaken }) {
   
   return (
     <div>
-      <div>{`Took ${timeTaken}`}</div>
+      <h2>{`Took ${timeTaken}`}</h2>
       <h1>Top 1000 Movies of All Time(CSR)</h1>
       <p>
         <small>(According to Metacritic)</small>
@@ -19,7 +20,7 @@ export default function Isr({ movies, timeTaken }) {
     </div>
   );
 }
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   let t0 = new Date()
 
   const { db } = await connectToDatabase();
