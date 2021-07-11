@@ -1,6 +1,5 @@
 import { connectToDatabase } from "../util/mongodb"
 import { GetServerSideProps } from "next"
-import { useFetch } from "./hooks/customHooks/useFetch";
 export default function Ssr({ movies, timeTaken }) {
   
   return (
@@ -11,7 +10,7 @@ export default function Ssr({ movies, timeTaken }) {
         <small>(According to Metacritic)</small>
       </p>
       {movies.map((movie) => (
-        <div key={movie._id} style={{backgroundColor:"#f3f3f3", padding:"16px", margin:"12px", borderRadius:"8px"}}>
+        <div style={{backgroundColor:"#f3f3f3", padding:"16px", margin:"12px", borderRadius:"8px"}}>
           <h2>{movie.title}</h2>
           <h3>{movie.metacritic}</h3>
           <p>{movie.plot}</p>
@@ -21,8 +20,19 @@ export default function Ssr({ movies, timeTaken }) {
   );
 }
 export const getServerSideProps: GetServerSideProps = async () => {
-  
-  const { movies, timeTaken } = await useFetch()
+  let t0 = new Date()
+
+  const { db } = await connectToDatabase();
+  const movies = await db
+    .collection("movies")
+    .find({})
+    .sort({ metacritic: -1 })
+    .limit(1000)
+    .toArray();
+  let t1: Date
+  t1 = new Date()
+  let timeTaken: number
+  timeTaken = t1.valueOf() - t0.valueOf()
 
   return {
     props: {
